@@ -88,7 +88,7 @@ def items_chosen
     puts "#{selections}"
   end
   # @menu << @side_choices[select -1] WHAT CAN I DO HERE INSTEAD?
-  puts "#{@side_choices[select - 1].name}"
+  puts "#{@side_choices[selection - 1].name}"
 end
  #IDK WHY THIS^ ISNT WORKING
 
