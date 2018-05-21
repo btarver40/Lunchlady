@@ -1,4 +1,5 @@
 require_relative "maindish"
+# require_relative "side_dish"
 
 @meatloaf = Lunch.new('Meatloaf', 2.5)
 @cheeseburger = Lunch.new('Cheeseburger', 8.0)
@@ -50,6 +51,7 @@ def main_menu
   selection =  gets.strip.to_i
   @order << @main[selection -1] # -1 makes it so the user doesnt see 0, 1, etc. it starts at 1
   puts "You selected #{@main[selection -1].name}"
+  side_dishes
 end
 
 
@@ -77,18 +79,22 @@ def side_dish2
   selection = gets.strip.to_i
   @sides << @side_choices[selection - 1]
   puts "You selected: #{@side_choices[selection - 1].name}"
+  cart_items
 end
 
 
 # part that tells us what has been selected--------------------------
-def items_chosen
+def cart_items
   puts "Here is what you have chosen so far:"
-  @main.each do |selections|
-    selections.info
-    puts "#{selections}"
+  @order.each do |cart|
+    cart.info
+    puts "#{cart}"
   end
   # @menu << @side_choices[select -1] WHAT CAN I DO HERE INSTEAD?
-  puts "#{@side_choices[selection - 1].name}"
+  selection = gets.strip.to_i
+  @order << @sides[selection -1]
+  puts "#{@sides[selection - 1].name}"
+  lunch_total
 end
  #IDK WHY THIS^ ISNT WORKING
 
@@ -101,6 +107,8 @@ def lunch_total
     item.price
     total += item.price
   end
+  # selection = gets.strip.to_i
+  # @sides << @side_choices[selection -1]
   puts "Your total is: #{total}"
 end
 #WHY IS IT ONLY SHOWING THE MAIN DISH TOTAL AND NOT ADDING UP ALL SELECTIONS??
@@ -115,7 +123,7 @@ loop do
     side_dishes
   when 3
     puts"--------------------------------------"
-    items_chosen
+    cart_items
   when 4
     puts "-------------------------------------"
     lunch_total
